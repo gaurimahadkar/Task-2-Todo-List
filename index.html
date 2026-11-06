@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TaskFlow | Smart Task Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">✓</div>
+                <h2>TaskFlow<span>.</span></h2>
+            </div>
+
+            <div class="sidebar-label">WORKSPACE</div>
+
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-link active">
+                    <span>▦</span> Dashboard
+                </a>
+
+                <a href="#tasks" class="nav-link">
+                    <span>☑</span> My Tasks
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="profile">
+                    <div class="avatar">G</div>
+                    <div>
+                        <h4>My Workspace</h4>
+                        <p>Personal Account</p>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="dashboard">
+
+            <!-- Topbar -->
+            <header class="topbar">
+
+                <div>
+                    <p class="date-label" id="current-date"></p>
+                    <h1>My Dashboard</h1>
+                    <p class="subtitle">
+                        Manage your tasks and stay productive.
+                    </p>
+                </div>
+
+                <div class="top-profile">
+                    <div class="avatar">G</div>
+                    <div>
+                        <h4>Gauri</h4>
+                        <p>Workspace</p>
+                    </div>
+                </div>
+
+            </header>
+
+            <!-- Welcome Banner -->
+            <section class="welcome-banner">
+
+                <div>
+                    <span class="welcome-tag">YOUR PRODUCTIVITY SPACE</span>
+
+                    <h2>Make today count! ✨</h2>
+
+                    <p>
+                        Stay organized, focus on what matters,
+                        and achieve your daily goals.
+                    </p>
+                </div>
+
+                <div class="banner-decoration">
+                    <span>✦</span>
+                    <span>✧</span>
+                    <span>✦</span>
+                </div>
+
+            </section>
+
+            <!-- Statistics -->
+            <section class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon purple">▦</div>
+                    <p>Total Tasks</p>
+                    <h2 id="total-count">0</h2>
+                    <span>All your tasks</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">◷</div>
+                    <p>Pending Tasks</p>
+                    <h2 id="pending-count">0</h2>
+                    <span>Need your attention</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <p>Completed</p>
+                    <h2 id="completed-count">0</h2>
+                    <span>Successfully finished</span>
+                </div>
+
+            </section>
+
+            <!-- Tasks Section -->
+            <section class="task-section" id="tasks">
+
+                <div class="section-header">
+                    <div>
+                        <h2>My Tasks</h2>
+                        <p>Manage your daily activities</p>
+                    </div>
+
+                    <button class="clear-btn" id="clear-completed">
+                        Clear Completed
+                    </button>
+                </div>
+
+                <!-- Add Task Form -->
+                <form id="todo-form" class="task-form">
+
+                    <div class="input-wrapper">
+                        <span>✎</span>
+
+                        <input
+                            type="text"
+                            id="task-input"
+                            placeholder="What needs to be done today?"
+                            autocomplete="off"
+                            maxlength="120"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="add-btn">
+                        <span>+</span> Add Task
+                    </button>
+
+                </form>
+
+                <!-- Filters -->
+                <div class="filter-bar">
+
+                    <div class="filters">
+
+                        <button class="filter-btn active"
+                                data-filter="all">
+                            All Tasks
+                        </button>
+
+                        <button class="filter-btn"
+                                data-filter="active">
+                            Pending
+                        </button>
+
+                        <button class="filter-btn"
+                                data-filter="completed">
+                            Completed
+                        </button>
+
+                    </div>
+
+                    <span id="task-count">0 tasks</span>
+
+                </div>
+
+                <!-- Task List -->
+                <ul id="task-list" class="task-list"></ul>
+
+                <!-- Empty State -->
+                <div id="empty-message" class="empty-state">
+
+                    <div class="empty-icon">✓</div>
+
+                    <h3>No tasks found!</h3>
+
+                    <p>
+                        Add a new task and start organizing your day.
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- Footer -->
+            <footer>
+                <p>Designed to keep you focused and productive.</p>
+                <p>© 2026 TaskFlow. All Rights Reserved.</p>
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

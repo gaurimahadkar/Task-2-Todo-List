@@ -1,0 +1,104 @@
+
+const todoForm = document.getElementById("todo-form");
+const taskInput = document.getElementById("task-input");
+const taskList = document.getElementById("task-list");
+const taskCount = document.getElementById("task-count");
+const remaining = document.getElementById("remaining");
+const emptyMessage = document.getElementById("empty-message");
+const clearCompleted = document.getElementById("clear-completed");
+
+// Load saved tasks
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+// Save tasks in browser
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+// Display tasks
+function renderTasks() {
+    taskList.innerHTML = "";
+
+    tasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.className = "task-item";
+
+        if (task.completed) {
+            li.classList.add("completed");
+        }
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = task.completed;
+
+        checkbox.addEventListener("change", () => {
+            tasks[index].completed = checkbox.checked;
+            saveTasks();
+            renderTasks();
+        });
+
+        const span = document.createElement("span");
+        span.className = "task-text";
+        span.textContent = task.text;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = "delete-btn";
+        deleteBtn.textContent = "Delete";
+
+        deleteBtn.addEventListener("click", () => {
+            tasks.splice(index, 1);
+            saveTasks();
+            renderTasks();
+        });
+
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        li.appendChild(deleteBtn);
+
+        taskList.appendChild(li);
+    });
+
+    const completedCount = tasks.filter(
+        task => task.completed
+    ).length;
+
+    const pendingCount = tasks.length - completedCount;
+
+    taskCount.textContent = `${tasks.length} Tasks`;
+    remaining.textContent = `${pendingCount} remaining`;
+
+    emptyMessage.style.display =
+        tasks.length === 0 ? "block" : "none";
+}
+
+// Add new task
+todoForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const taskText = taskInput.value.trim();
+
+    if (taskText === "") {
+        return;
+    }
+
+    tasks.push({
+        text: taskText,
+        completed: false
+    });
+
+    saveTasks();
+    renderTasks();
+
+    taskInput.value = "";
+    taskInput.focus();
+});
+
+// Clear completed tasks
+clearCompleted.addEventListener("click", () => {
+    tasks = tasks.filter(task => !task.completed);
+    saveTasks();
+    renderTasks();
+});
+
+// Initial display
+renderTasks();
